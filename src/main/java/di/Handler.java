@@ -36,7 +36,7 @@ public class Handler {
                     else key+="POST";
 
                     key+=m.getAnnotation(Path.class).value();
-//                    System.out.println(key + ": "+  m.getName());
+                    System.out.println(key + ": "+  m.getName());
                     RouteRegistry.getInstance().getRouteHandlers().put(key, m);
                 }
             }
