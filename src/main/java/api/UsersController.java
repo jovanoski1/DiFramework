@@ -1,12 +1,12 @@
 package api;
 
-import anotations.Controller;
-import anotations.GET;
-import anotations.POST;
-import anotations.Path;
+import anotations.*;
 
 @Controller
 public class UsersController {
+
+    @Autowired
+    UserA x;
 
     @GET
     @Path(value = "/users")

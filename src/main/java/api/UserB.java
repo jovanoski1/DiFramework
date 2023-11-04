@@ -3,11 +3,11 @@ package api;
 import anotations.Bean;
 import anotations.Qualified;
 
-@Bean(scope = "prototype")
-@Qualified(value = "userA")
-public class UserA implements User{
+@Bean
+@Qualified(value = "userB")
+public class UserB implements User{
     @Override
     public String printUser() {
-        return "UserA";
+        return "UserB";
     }
 }
