@@ -11,9 +11,10 @@ public class Server {
 
     public static final int TCP_PORT = 8080;
 
-    public static void main(String[] args) throws IOException, NoSuchMethodException, InvocationTargetException, InstantiationException, IllegalAccessException {
-        Handler.registerRoutes();
+    public static void main(String[] args) {
         try {
+            Handler.registerRoutes();
+            Handler.registerQualified();
             ServerSocket serverSocket = new ServerSocket(TCP_PORT);
             System.out.println("Server is running at http://localhost:"+TCP_PORT);
             while(true){
@@ -21,7 +22,7 @@ public class Server {
                 new Thread(new ServerThread(socket)).start();
             }
 
-        } catch (IOException e) {
+        } catch (Throwable e) {
             e.printStackTrace();
         }
 
