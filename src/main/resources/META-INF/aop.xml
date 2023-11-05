@@ -1,6 +1,6 @@
 <aspectj>
     <aspects>
-        <aspect name="aspects.Test"/>
+        <aspect name="aspects.MyAspects"/>
     </aspects>
     <weaver options="-verbose -showWeaveInfo -Xset:weaveJavaxPackages=true">
     </weaver>

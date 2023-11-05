@@ -1,5 +1,6 @@
 package server;
 
+import di.RouteRegistry;
 import framework.request.Header;
 import framework.request.Helper;
 import framework.request.Request;
@@ -9,6 +10,7 @@ import framework.response.JsonResponse;
 import framework.response.Response;
 
 import java.io.*;
+import java.lang.reflect.InvocationTargetException;
 import java.net.Socket;
 import java.util.HashMap;
 import java.util.Map;
@@ -52,7 +54,12 @@ public class ServerThread implements Runnable{
             Map<String, Object> responseMap = new HashMap<>();
             responseMap.put("route_location", request.getLocation());
             responseMap.put("route_method", request.getMethod().toString());
-            responseMap.put("parameters", request.getParameters());
+            Object instance =  RouteRegistry.getInstance().getControllerInstances().get("api.UsersController");
+            System.out.println(request.getMethod().toString()+request.getLocation());
+            java.lang.reflect.Method m = RouteRegistry.getInstance().getRouteHandlers().get(request.getMethod().toString()+request.getLocation());
+            System.out.println(instance);
+            System.out.println(m);
+            responseMap.put("parameters", m.invoke(instance, null));
             Response response = new JsonResponse(responseMap);
 
             out.println(response.render());
@@ -63,6 +70,10 @@ public class ServerThread implements Runnable{
 
         } catch (IOException | RequestNotValidException e) {
             e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            throw new RuntimeException(e);
+        } catch (IllegalAccessException e) {
+            throw new RuntimeException(e);
         }
     }
 

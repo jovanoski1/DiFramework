@@ -1,5 +1,6 @@
 package server;
 
+import di.DiEngine;
 import di.Handler;
 
 import java.io.IOException;
@@ -13,8 +14,8 @@ public class Server {
 
     public static void main(String[] args) {
         try {
+            DiEngine.getInstance().registerQualified();
             Handler.registerRoutes();
-            Handler.registerQualified();
             ServerSocket serverSocket = new ServerSocket(TCP_PORT);
             System.out.println("Server is running at http://localhost:"+TCP_PORT);
             while(true){

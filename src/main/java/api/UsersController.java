@@ -6,7 +6,23 @@ import anotations.*;
 public class UsersController {
 
     @Autowired
-    UserA x;
+    @Qualified(value = "userA")
+    User x;
+
+    @Autowired
+    UserA y;
+
+    @GET
+    @Path(value = "/x")
+    public String getX(){
+        return x.printUser();
+    }
+
+    @GET
+    @Path(value = "/y")
+    public String getY(){
+        return y.printUser();
+    }
 
     @GET
     @Path(value = "/users")
