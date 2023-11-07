@@ -87,7 +87,6 @@ public class Handler {
 
     public static boolean isScopeSingleton(Class<?> clazz){
         if (clazz.getAnnotation(Bean.class) != null){
-            System.out.println(clazz.getAnnotation(Bean.class).scope() + " prokic");
             return clazz.getAnnotation(Bean.class).scope().equals("singleton");
         }
         else if (clazz.getAnnotation(Service.class) != null){
