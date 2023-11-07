@@ -32,21 +32,15 @@ public class MyAspects {
                 }
         }
 
-        /// ako je bean i ako je singleton i ako nije instanciran i nema @Autowired polja
-//        if (!Handler.containsAutowiredFields(clazz) && Handler.isBean(clazz) && Handler.isScopeSingleton(clazz)){
-//            diEngine.getBeanInstances().put(clazz.getName(), classInstance);
-//        }
-//        else{
-            Field[] fields = clazz.getDeclaredFields();
-            for (Field f : fields){
-                System.out.println(f.getName());
-                Handler.solveFields(f, classInstance);
-            }
+        Field[] fields = clazz.getDeclaredFields();
+        for (Field f : fields){
+            System.out.println(f.getName());
+            Handler.solveFields(f, classInstance);
+        }
 
-            if (Handler.isBean(clazz) && Handler.isScopeSingleton(clazz)){
-                diEngine.getBeanInstances().put(clazz.getName(), classInstance);
-            }
-//        }
+        if (Handler.isBean(clazz) && Handler.isScopeSingleton(clazz)){
+            diEngine.getBeanInstances().put(clazz.getName(), classInstance);
+        }
         System.out.println("-------------------------");
         return classInstance;
     }
