@@ -1,5 +1,6 @@
 package server;
 
+import di.Handler;
 import di.RouteRegistry;
 import framework.request.Header;
 import framework.request.Helper;
@@ -54,7 +55,11 @@ public class ServerThread implements Runnable{
             Map<String, Object> responseMap = new HashMap<>();
             responseMap.put("route_location", request.getLocation());
             responseMap.put("route_method", request.getMethod().toString());
-            Object instance =  RouteRegistry.getInstance().getControllerInstances().get("api.UsersController");
+            Object instance = RouteRegistry.getInstance().findControllerByMethodPath(request.getLocation());//RouteRegistry.getInstance().getControllerInstances().get("api.UsersController");
+            if (instance == null){
+                System.out.println("Not found controller with path specified!");
+                return;
+            }
             System.out.println(request.getMethod().toString()+request.getLocation());
             java.lang.reflect.Method m = RouteRegistry.getInstance().getRouteHandlers().get(request.getMethod().toString()+request.getLocation());
             System.out.println(instance);
